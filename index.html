@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+    <head>
+        <title>File2Image</title>
+
+        <style>
+            * {
+                font-family: "Courier New", Courier, monospace;
+                margin: 0;
+                padding: 0;
+            }
+
+            body, html {
+                width: 100%;
+                height: 100%;
+            }
+            
+            #wrapper {
+                width: 100%;
+                height: 100%;
+
+                background-color: rgb(202, 202, 202);
+
+                justify-content: center;
+                align-items: center;
+
+                gap: 20px;
+            }
+
+            .column {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: row;
+            }
+
+            canvas {
+                background-color: #fff;
+                width: 600px;
+                height: 600px;
+            }
+
+            button {
+                padding: 15px;
+                width: 500px;
+            }
+
+            select {
+                width: 100px;
+                height: 20px;
+            }
+
+            #fileupload {
+                display: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper" class="column">
+            <h1>FileToImage</h1>
+
+            <div class="column">
+                <span>Preview:</span>
+                <canvas width="32" height="32"></canvas>
+                <small id="filename"></small>
+            </div>
+
+            <select id="colorchoice" oninput="update(bytes)">
+                <option value="r">r</option>
+                <option value="g">g</option>
+                <option value="b">b</option>
+                <option value="grey">greyscale</option>
+            </select>
+
+            <div>
+                <label for="widthrange" id="label_widthrange">Size (032):</label>
+                <input id="widthrange" type="range" value="32" min="1" max="1500" oninput="document.getElementById('label_widthrange').innerText = 'Size (' + this.value.toString().padStart(3, '0') + '):'; canvas.width = this.value; canvas.height = this.value; update(bytes)" />
+            </div>
+
+            <button id="upload">Click here to upload file<br/><small>(No drag + drop)</small></button>
+
+            <input type="file" id="fileupload" />
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
